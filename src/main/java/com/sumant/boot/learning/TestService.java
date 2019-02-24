@@ -1,6 +1,5 @@
 package com.sumant.boot.learning;
 
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,14 +7,19 @@ import org.springframework.web.client.RestTemplate;
 public class TestService {
 	
 	private final RestTemplate template;
+	private final String url;
 	
-	public TestService(RestTemplateBuilder builder) {
-		this.template = builder.build();
+	public TestService(
+			RestTemplate template, 
+			String url
+			) {
+		this.url = url;
+		this.template = template;
 	}
 
 	public String callRestEndpoint() {
 		
-		return template.getForObject("/pc", String.class);
+		return template.getForObject(url + "/pc", String.class);
 		
 	}
 
